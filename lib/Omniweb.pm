@@ -1,4 +1,4 @@
-# $Id: Omniweb.pm,v 1.3 2002/12/03 07:14:14 comdog Exp $
+# $Id: Omniweb.pm,v 1.5 2004/09/17 18:19:49 comdog Exp $
 package HTTP::Cookies::Omniweb;
 use strict;
 
@@ -8,11 +8,11 @@ HTTP::Cookies::Omniweb - Cookie storage and management for Omniweb
 
 =head1 SYNOPSIS
 
-use HTTP::Cookies::Omniweb;
+	use HTTP::Cookies::Omniweb;
 
-$cookie_jar = HTTP::Cookies::Omniweb->new;
+	$cookie_jar = HTTP::Cookies::Omniweb->new;
 
-# otherwise same as HTTP::Cookies
+	# otherwise same as HTTP::Cookies
 
 =head1 DESCRIPTION
 
@@ -35,18 +35,18 @@ that out, so output files will not exactly match input files.
 This source is part of a SourceForge project which always has the
 latest sources in CVS, as well as all of the previous releases.
 
-	https://sourceforge.net/projects/brian-d-foy/
+	http://sourceforge.net/projects/brian-d-foy/
 
 If, for some reason, I disappear from the world, one of the other
 members of the project can shepherd this module appropriately.
 
 =head1 AUTHOR
 
-brian d foy, E<lt>bdfoy@cpan.orgE<gt>
+brian d foy, C<< <bdfoy@cpan.org> >>
 
 =head1 COPYRIGHT
 
-Copyright 2002, brian d foy, All rights reserved
+Copyright 2002-2004, brian d foy, All rights reserved
 
 This library is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself.
@@ -59,16 +59,16 @@ use vars qw( $VERSION );
 use constant TRUE  => 'TRUE';
 use constant FALSE => 'FALSE';
 
-$VERSION = sprintf "%2d.%02d", q$Revision: 1.3 $ =~ m/ (\d+) \. (\d+) /xg;
+$VERSION = sprintf "%2d.%02d", q$Revision: 1.5 $ =~ m/ (\d+) \. (\d+) /xg;
 
 my $EPOCH_OFFSET = 978_350_400;  # difference from Unix epoch
 
 sub load
 	{
     my( $self, $file ) = @_;
- 
+
     $file ||= $self->{'file'} || return;
- 
+
     local $_;
     local $/ = "\n";  # make sure we got standard record separator
 
@@ -76,40 +76,40 @@ sub load
 
     my $magic = ( <$fh>, <$fh>, <$fh> );
 
-    unless( $magic =~ /^\s*<OmniWebCookies>\s*$/ ) 
+    unless( $magic =~ /^\s*<OmniWebCookies>\s*$/ )
     	{
 		warn "$file does not look like an Omniweb cookies file" if $^W;
 		close $fh;
 		return;
     	}
- 
+
     my $now = time() - $EPOCH_OFFSET;
- 
+
  	my $domain;
-    while( <$fh> ) 
+    while( <$fh> )
     	{
 		$domain = $1 if m/<domain name="(.*?)">/;
 		next if m|</domain>|;
 		last if m|</OmniWebCookies>|;
 		next unless m|<cookie|;
-		
+
 		my $path    = m/path="(.*?)"/ ? $1 : "/";
 		$path =~ s|%2f|/|ig;
-		
+
 		my $name    = $1 if m/name="(.*?)"/;
 		my $value   = $1 if m/value="(.*?)"/;
 		my $expires = $1 if m/expires="(.*?)"/;
-		
+
 		#print STDERR "D=$domain P=$path N=$name V=$value E=$expires\n";
-					
+
 		my $secure = FALSE;
-		
+
 		$self->set_cookie(undef, $name, $value, $path, $domain, undef,
 			0, $secure, $expires - $now, 0);
     	}
-    	
+
     close $fh;
-    
+
     1;
 	}
 
@@ -118,7 +118,7 @@ sub save
     my( $self, $file ) = @_;
 
     $file ||= $self->{'file'} || return;
- 
+
     local $_;
     open my $fh, "> $file" or return;
 
@@ -129,35 +129,35 @@ sub save
 EOT
 
     my $now = time - $EPOCH_OFFSET;
-    
+
     foreach my $domain ( sort keys %{ $self->{COOKIES} } )
     	{
     	my $domain_hash = $self->{COOKIES}{$domain};
-    	
+
     	print $fh qq|<domain name="$domain">\n|;
- 
+
  		PATH: foreach my $path ( sort keys %$domain_hash )
  			{
  			my $cookie_hash = $domain_hash->{ $path };
- 			
+
 			COOKIE: foreach my $name ( sort keys %$cookie_hash )
 				{
 				my( $value, $expires ) = @{ $cookie_hash->{$name} }[ 1, 5 ];
 				$expires -= $EPOCH_OFFSET;
 				my $path_str = $path eq '/' ? '' : qq| path="$path"|;
-				
+
 				print $fh qq|  <cookie name="$name"$path_str value="$value"| .
 					qq| expires="$expires" />\n|;
 				}
 			}
-    		
+
 		print $fh "</domain>\n";
     	}
 
 	print $fh "</OmniWebCookies>\n";
-	 	
+
     close $fh;
-    
+
     1;
 	}
 
