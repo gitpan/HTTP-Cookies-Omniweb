@@ -1,0 +1,4 @@
+# $Id: Changes,v 1.2 2002/12/03 07:14:38 comdog Exp $
+
+1.03 Mon Dec  2 18:49:29 CST 2002
+	- initial release derived from HTTP::Cookies::Netscape
