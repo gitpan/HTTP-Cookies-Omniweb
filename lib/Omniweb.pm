@@ -1,4 +1,4 @@
-# $Id: Omniweb.pm,v 1.8 2006/05/27 07:53:49 comdog Exp $
+# $Id: Omniweb.pm,v 1.9 2007/01/10 04:10:35 comdog Exp $
 package HTTP::Cookies::Omniweb;
 use strict;
 
@@ -44,12 +44,12 @@ members of the project can shepherd this module appropriately.
 
 brian d foy, C<< <bdfoy@cpan.org> >>
 
-=head1 COPYRIGHT
+=head1 COPYRIGHT AND LICENSE
 
-Copyright 2002-2006, brian d foy, All rights reserved
+Copyright (c) 2002-2007 brian d foy.  All rights reserved.
 
-This library is free software; you can redistribute it and/or
-modify it under the same terms as Perl itself.
+This program is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 
@@ -59,7 +59,7 @@ use vars qw( $VERSION );
 use constant TRUE  => 'TRUE';
 use constant FALSE => 'FALSE';
 
-$VERSION = sprintf "%2d.%02d", q$Revision: 1.8 $ =~ m/ (\d+) \. (\d+) /xg;
+$VERSION = sprintf "%2d.%02d", q$Revision: 1.9 $ =~ m/ (\d+) \. (\d+) /xg;
 
 my $EPOCH_OFFSET = 978_350_400;  # difference from Unix epoch
 
