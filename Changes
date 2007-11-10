@@ -1,4 +1,8 @@
-# $Id: Changes,v 1.6 2007/01/10 04:11:57 comdog Exp $
+# $Id: Changes 2378 2007-11-10 20:51:44Z comdog $
+
+1.11 - Sat Nov 10 14:50:56 2007
+ * Cleanups for the move from CVS to SVN, kwalitee
+	* No need to upgrade
 
 1.09 - Tue Jan  9 22:12:13 2007
 	* updated copyright and license info

@@ -1,6 +1,9 @@
-# $Id: Omniweb.pm,v 1.9 2007/01/10 04:10:35 comdog Exp $
+# $Id: Omniweb.pm 2377 2007-11-10 20:50:14Z comdog $
 package HTTP::Cookies::Omniweb;
 use strict;
+
+use warnings;
+no warnings;
 
 =head1 NAME
 
@@ -59,7 +62,7 @@ use vars qw( $VERSION );
 use constant TRUE  => 'TRUE';
 use constant FALSE => 'FALSE';
 
-$VERSION = sprintf "%2d.%02d", q$Revision: 1.9 $ =~ m/ (\d+) \. (\d+) /xg;
+$VERSION = 1.11;
 
 my $EPOCH_OFFSET = 978_350_400;  # difference from Unix epoch
 

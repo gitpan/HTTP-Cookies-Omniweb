@@ -1,16 +1,20 @@
-# $Id: Makefile.PL,v 1.6 2007/01/10 04:11:30 comdog Exp $
+# $Id: Makefile.PL 2377 2007-11-10 20:50:14Z comdog $
 use ExtUtils::MakeMaker;
+
+require 5.006;
 
 eval "use Test::Manifest 1.14";
 
 WriteMakefile
 	(
-	'NAME'           => 'HTTP::Cookies::Omniweb',
-	'VERSION_FROM'   => 'lib/Omniweb.pm',
+	'NAME'          => 'HTTP::Cookies::Omniweb',
+	'ABSTRACT'      => 'Cookie storage and management for Omniweb',
+	'VERSION_FROM'  => 'lib/Omniweb.pm',
 	'LICENSE'       => 'perl',
+	'AUTHOR'        => 'brian d foy <bdfoy@cpan.org>',
+
 	'PREREQ_PM'      => {
 		'HTTP::Cookies'         => '1.25',
-		'Test::More'            => '0',
 		'Text::Diff'            => '0',
 		},
 	'PM'             => {
