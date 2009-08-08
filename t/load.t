@@ -1,5 +1,3 @@
-# $Id: load.t 663 2002-12-03 07:07:03Z comdog $
-
 use Test::More tests => 5;
 
 use HTTP::Cookies::Omniweb;

@@ -1,7 +1,11 @@
-# $Id: Changes 2378 2007-11-10 20:51:44Z comdog $
+# Changes for HTTP::Cookies::Omniweb
+
+1.12 - Sat Aug  8 05:39:58 2009
+	* Fixed test from failing cookie: no code changes
+	* Migrated to github
 
 1.11 - Sat Nov 10 14:50:56 2007
- * Cleanups for the move from CVS to SVN, kwalitee
+	* Cleanups for the move from CVS to SVN, kwalitee
 	* No need to upgrade
 
 1.09 - Tue Jan  9 22:12:13 2007
@@ -16,7 +20,7 @@
 	* no code changes: no need to upgrade
 
 1.05 - Fri Sep 17 13:21:58 2004
- * distribution cleanups: no need to upgrade
+	* distribution cleanups: no need to upgrade
 
 1.03 Mon Dec  2 18:49:29 CST 2002
-	- initial release derived from HTTP::Cookies::Netscape
+	* initial release derived from HTTP::Cookies::Netscape
